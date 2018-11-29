@@ -1,0 +1,16 @@
+{
+  "name": "jest-demo",
+  "version": "1.0.0",
+  "description": "Jest demo",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest --config ./conf.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^23.6.0",
+    "jest-html-reporter": "^2.4.2",
+    "supertest": "^3.3.0"
+  }
+}

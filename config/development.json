@@ -1,0 +1,8 @@
+{
+    "app":{
+        "proto": "http",
+        "host":"localhost",
+        "port":"8085",
+        "path":"/something"
+    }
+}
