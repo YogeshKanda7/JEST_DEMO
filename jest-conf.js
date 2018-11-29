@@ -10,8 +10,5 @@ module.exports = {
             "outputPath": "./reports/test-report.html",
             "includeFailureMsg": "true"
         }],
-    ],
-    "globals": {
-        "Environment": process.env.ENV
-      },
+    ]
 }

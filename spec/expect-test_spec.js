@@ -1,11 +1,12 @@
 var file = require('fs'),
 	supertest = require('supertest'),
-	server = supertest('127.0.0.1:8081');
+	config = require('config'),
+	server = supertest(config.get('baseurl'));
 
 	console.log(global.baseurl);
 
 describe('JEST Demo', ()=>{
-	
+
 	test('It should get 200 status code', (done) =>{
 		server.get('/listUsers')
 		.end( (err, res) =>{
