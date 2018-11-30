@@ -7,7 +7,6 @@ const mocks = {
 		/*
 		 * users
 		 */
-
 		getUsers(){
 			return nock(mockHost)
 			.get('/users')
@@ -57,6 +56,14 @@ const mocks = {
 	    return nock(mockHost)
 	      .get('/res/invalid')
 	      .reply(200, '{"aaa":}', {
+	        'Content-Type': 'application/json'
+	      });
+	  },
+
+		invalidRoute() {
+	    return nock(mockHost)
+	      .get('/invalid')
+	      .reply(404, '{"message":"Page not found"}', {
 	        'Content-Type': 'application/json'
 	      });
 	  }

@@ -4,7 +4,7 @@
   "description": "Jest demo",
   "main": "app.js",
   "scripts": {
-    "test": "jest --config ./conf.js"
+    "test": "jest --config ./jest-conf.js"
   },
   "author": "",
   "license": "ISC",

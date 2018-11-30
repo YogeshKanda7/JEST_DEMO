@@ -1,8 +1,6 @@
 module.exports = {
     "verbose": true,
-    "roots": [
-      "./spec/"
-    ],
+    "roots":["./spec_tests/"],
     "reporters": [
         "default",
         ["./node_modules/jest-html-reporter", {
@@ -10,5 +8,11 @@ module.exports = {
             "outputPath": "./reports/test-report.html",
             "includeFailureMsg": "true"
         }],
-    ]
+    ],
+    "testPathIgnorePatterns":[
+      "fixtures"
+    ],
+    "globals": {
+      "ENV": process.env.NODE_ENV
+    }
 }
