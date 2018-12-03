@@ -4,7 +4,8 @@
   "description": "Jest demo",
   "main": "app.js",
   "scripts": {
-    "test": "jest --config ./jest-conf.js"
+    "test-mock": "set NODE_ENV=mock& jest --config ./jest-conf.js",
+    "test-dev": "set NODE_ENV=development& jest --config ./jest-conf.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "supertest": "^3.3.0"
   },
   "dependencies": {
+    "chai": "^4.2.0",
     "config": "^3.0.0"
   }
 }

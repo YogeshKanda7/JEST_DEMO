@@ -31,6 +31,17 @@ const mocks = {
 		        email: 'joe.schmoe@example.com'
 		      });
 		  },
+			createUser() {
+    		return nock(mockHost)
+		      .post('/users', {
+		        email: 'user@example.com',
+		        password: 'password'
+		      })
+		      .reply(201, {
+		        id: 2,
+		        email: 'user@example.com'
+		      });
+  		},
 
 			/**
 	   * Errors

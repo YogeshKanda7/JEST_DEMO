@@ -1,17 +1,20 @@
 var file = require('fs'),
-	supertest = require('supertest'),
+	superTest = require('supertest'),
 	config = require('config'),
-	server = supertest("http://api.example.com"),
+	request = superTest(global.ENV),
 	mocks = require('./fixtures/http_mocks');
 
 
 describe('JEST Demo', ()=>{
 
+	//console.log((global.ENV);
+	console.log(config.get("app.baseurl"));
+
 	test('It should get 200 status code', (done) =>{
 
 		mocks.use(['getUsers'])
 
-		server.get('/users')
+		request.get('/users')
 		.end( (err, res) =>{
 			if(err) done.fail(err);
 			expect(res.status).toBe(200);
@@ -23,7 +26,7 @@ describe('JEST Demo', ()=>{
 
 		mocks.use(['invalidRoute'])
 
-		server.get('/invalid')
+		request.get('/invalid')
 		.end( (err, res) =>{
 			if(err) done.fail(err);
 			expect(res.status).toBe(404);
@@ -35,7 +38,7 @@ describe('JEST Demo', ()=>{
 
 		mocks.use(['getUser1'])
 
-		server.get('/users/1')
+		request.get('/users/1')
 		.end( (err, res)=>{
 			if(err) done.fail(err);
 			expect(res.text.length).toBeGreaterThan(0);
@@ -46,7 +49,7 @@ describe('JEST Demo', ()=>{
 	it('expect body content must match string', (done)=>{
 		mocks.use(['getUser1'])
 
-		server.get('/users/1')
+		request.get('/users/1')
 	      .expect('json', {
 	        id: 1,
 	        email: 'joe.schmoe@example.com'
@@ -54,60 +57,47 @@ describe('JEST Demo', ()=>{
 	      done();
 	})
 
-	it('expectHeader should match regardless of case', (doneFn)=>{
+	it('expectHeader should match regardless of case', (done)=>{
     mocks.use(['getUser1']);
 
-    server.get('/users/1')
+    request.get('/users/1')
       .expect('header', 'conTent-tYpe', 'application/json')
-      .done();
+      done();
   });
 
-	// it('expectHeader should not match with bad regex', (doneFn)=>{
-  //   mocks.use(['getUser1']);
-	//
-  //   server.get('/users/1')
-  //     .expectNot('header', 'Content-Type', /jsonx/)
-  //     .done(doneFn);
-  // });
-	//
-	// it('expectHeader should fail check for header existence when third argument is not supplied and header is not present', function(doneFn) {
-  //   mocks.use(['getUser1']);
-	//
-  //   server.get('/users/1')
-  //     .expectNot('header', 'Custom-Header')
-  //     .done(doneFn);
-  // });
-	//
-	// it('should output invalid body and reason in error message', function(doneFn) {
-  //   mocks.use(['invalidJSON']);
-	//
-  //   frisby.setup({ request: { inspectOnFailure: false } })
-  //     .get(testHost + '/res/invalid')
-  //     .then(function (res) {
-  //       fail('this function will never be called.');
-  //     })
-  //     .catch(function (err) {
-  //       expect(err.message).toMatch(/^Invalid json response /);
-  //       expect(err.message).toMatch(/body: '.*'/);
-  //       expect(err.message).toMatch(/reason: '.+'/);
-  //     })
-  //     .done(doneFn);
-  // });
+	it('expectHeader should not match with bad regex', (done)=>{
+    mocks.use(['getUser1']);
 
-	// test('It should add data', (done)=>{
-	// 	server.post('/addUser', {
-	// 		"user4" : {
-	// 			"name" : "mohit",
-	// 			"password" : "password4",
-	// 			"profession" : "teacher",
-	// 			"id": 4
-	// 		 }
-	// 	})
-	// 	.end( (err, res)=>{
-	// 		if(err) done.fail(err);
-	// 		expect(res.text.length).toBeGreaterThan(0);
-	// 		done();
-	// 	});
-	// });
+    request.get('/users/1')
+			.expect('header','Content-Type', /jsonx/)
+			done();
+  });
 
+	it('should output invalid body and reason in error message', (done)=>{
+    mocks.use(['invalidJSON']);
+
+      request.get('/res/invalid')
+      .then(function (res) {
+        fail('this function will never be called.');
+      })
+      .catch(function (err) {
+        expect(err.message).toMatch(/^Invalid json response /);
+        expect(err.message).toMatch(/body: '.*'/);
+        expect(err.message).toMatch(/reason: '.+'/);
+      })
+      done();
+  });
+
+	it('should support JSON natively', (done)=>{
+    mocks.use(['createUser']);
+
+    request.post('/users', {
+      body: {
+        email: 'user@example.com',
+        password: 'password'
+      }
+    }).expect('status', 201)
+
+		done();
+  });
 });

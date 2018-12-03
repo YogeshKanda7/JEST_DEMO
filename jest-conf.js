@@ -1,3 +1,4 @@
+config = require('config')
 module.exports = {
     "verbose": true,
     "roots":["./spec_tests/"],
@@ -13,6 +14,6 @@ module.exports = {
       "fixtures"
     ],
     "globals": {
-      "ENV": process.env.NODE_ENV
+      "ENV": config.get("app.baseurl")
     }
 }
