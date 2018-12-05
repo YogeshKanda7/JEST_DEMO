@@ -1,5 +1,5 @@
 {
     "app":{
-        "baseurl":"http://localhost:3000"
+        "baseurl":"https://api.thecatapi.com/v1/"
     }
 }
