@@ -5,6 +5,7 @@ request = superTest(global.ENV);
  
 var d = new Date();
 this.vote_id = 123;
+this.image_id = 123;
 
 describe('Cat API', ()=>{
     it('should return 200 status code', (done) =>{
@@ -98,7 +99,6 @@ describe('Cat API', ()=>{
     });
 
     it('should save an image as favourite', (done) =>{
-        vote_id = 47129;
         request.post('v1/favourites')
         .send({
             "image_id": "asf2",
@@ -108,7 +108,42 @@ describe('Cat API', ()=>{
             if(err) done.fail(err);
             expect(res.status).toBe(200);
             expect(res.body.message).toBe("SUCCESS");
+            this.image_id = res.body.id;
             done();
         });
     });
+
+    it('should return all favourites', (done) =>{
+        request.get('v1/favourites')
+        .set("X-Api-Key", "04cf3299-801e-4eac-b899-31c16488f94e")
+        .end( (err, res) =>{
+            if(err) done.fail(err);
+            expect(res.status).toBe(200);
+            console.log(res.body);
+            done();
+        });
+    });
+
+    it('should return specified favourite image', (done) =>{
+        request.get('v1/favourites/' + this.image_id)
+        .set("X-Api-Key", "04cf3299-801e-4eac-b899-31c16488f94e")
+        .end( (err, res) =>{
+            if(err) done.fail(err);
+            expect(res.status).toBe(200);
+            expect(res.body.id).toBe(this.image_id);
+            done();
+        });
+    });
+
+    it('should delete specified favourite image', (done) =>{
+        request.delete('v1/favourites/' + this.image_id)
+        .set("X-Api-Key", "04cf3299-801e-4eac-b899-31c16488f94e")
+        .end( (err, res) =>{
+            if(err) done.fail(err);
+            expect(res.status).toBe(200);
+            expect(res.body.message).toBe("SUCCESS");
+            done();
+        });
+    });
+
 });
