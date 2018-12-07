@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test-mock": "set NODE_ENV=mock& jest --config ./jest-conf.js",
-    "test-dev": "set NODE_ENV=development& jest --config ./jest-conf.js"
+    "test-dev": "set NODE_ENV=development& jest --config ./jest-conf.js",
+    "test-proxy": "set NODE_ENV=cat-api-production& jest --config ./jest-conf.js cat-api"
   },
   "author": "",
   "license": "ISC",

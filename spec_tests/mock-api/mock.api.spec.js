@@ -2,7 +2,7 @@ var file = require('fs'),
 	superTest = require('supertest'),
 	config = require('config'),
 	request = superTest(global.ENV),
-	mocks = require('./fixtures/http_mocks');
+	mocks = require('../fixtures/http_mocks');
 
 
 describe('JEST Demo', ()=>{
