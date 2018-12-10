@@ -195,6 +195,11 @@ const mocks = {
 			/**
 	   * Errors
 	   */
+		 limitedCategories() {
+			 return nock(mockHost)
+			 .get('/v1/categories?limit=2&page=1')
+			 .reply(200,[ { id: 1, name: 'hats' }, { id: 14, name: 'sinks' } ])
+		 },
 	  timeout() {
 	    return nock(mockHost)
 	      .get('/timeout')

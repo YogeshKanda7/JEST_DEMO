@@ -16,40 +16,35 @@ describe('Categories route', ()=>{
         .set("X-Api-Key", config.get("app.api-key"))
         .end( (err, res) =>{
             if(err) done.fail(err);
-            // console.log(res.status, res.headers);
-            // console.log(res.body);
             expect(res.status).toBe(200);
             expect()
             done();
         });
     });
-    
+
     it('should return specified limit of data in response body', (done) =>{
 
+        mocks.use(['limitedCategories']);
 
-
-        mocks.use(['listAllCategories']);
-
-        request.get('/v1/categories?limit=' + response_limit + '&page=' + page_limit)
+        request.get('/v1/categories?limit=2&page=1')
         .set("X-Api-Key", config.get("app.api-key"))
         .end( (err, res) =>{
-            
             if(err) done.fail(err);
-            // console.log(res.status, res.headers);
-            //     res.on('data', function (chunk) {
-            //         // str += chunk;
-            //   });
-
-            //     res.on('end', function () {
-            //         // console.log(str);
-            //   });
-
-            // res.on(res, function(body){
-            //     console.log("inside response.on");
-            //     console.log(body);
+            //console.log(res.status, res.headers);
+            // res.on('data', function (chunk) {
+            //       // str += chunk;
             // });
-            // expect(res.status).toBe(200);
-            // expect()
+            // res.on('end', function () {
+            //       // console.log(str);
+            // });
+            // res.on(res, function(body){
+            //   console.log("inside response.on");
+            //   console.log(body);
+            // });
+            console.log(res.body)
+            console.log(`Count of the node ${res.body.length}`)
+            expect(res.status).toBe(200);
+            expect()
             done();
         });
     });
