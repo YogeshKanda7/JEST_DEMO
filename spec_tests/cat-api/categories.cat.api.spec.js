@@ -51,6 +51,7 @@ describe('Categories route', ()=>{
       .end( (err, res) => {
         if(err) done.fail(err);
         expect(res.status).toBe(200);
+        expect(res.body.length).toBeGreaterThan(0);
         expect(res.body).toEqual(expectedData);
         done();
       });

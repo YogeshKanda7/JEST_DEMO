@@ -8,7 +8,7 @@ describe('Breeds route', ()=>{
     response_limit = 1;
     page_limit = 1;
 
-    it('should return 200 status code', (done) =>{
+    it('should return all breeds with 200 status code', (done) =>{
 
         mocks.use(['listAllCatBreeds']);
 
@@ -17,7 +17,6 @@ describe('Breeds route', ()=>{
         .end( (err, res) =>{
             if(err) done.fail(err);
             expect(res.status).toBe(200);
-            expect()
             done();
         });
     });
@@ -30,7 +29,7 @@ describe('Breeds route', ()=>{
         .set("X-Api-Key", config.get("app.api-key"))
         .end( (err, res) =>{
             if(err) done.fail(err);
-            console.log(res.body);
+            // console.log(res.body);
             expect(res.status).toBe(200);
             expect()
             done();

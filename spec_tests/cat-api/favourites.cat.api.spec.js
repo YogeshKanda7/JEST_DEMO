@@ -14,8 +14,8 @@ describe('Favourites route', ()=>{
         .set("X-Api-Key", config.get("app.api-key"))
         .end( (err, res) =>{
             if(err) done.fail(err);
-            console.log(res.status, res.headers);
-            console.log(res.body);
+            // console.log(res.status, res.headers);
+            // console.log(res.body);
             expect(res.status).toBe(200);
             done();
         });
@@ -42,7 +42,7 @@ describe('Favourites route', ()=>{
         .end( (err, res) =>{
             if(err) done.fail(err);
             expect(res.status).toBe(200);
-            console.log(res.body);
+            // console.log(res.body);
             done();
         });
     });
