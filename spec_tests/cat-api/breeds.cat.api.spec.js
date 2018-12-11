@@ -16,8 +16,6 @@ describe('Breeds route', ()=>{
         .set("X-Api-Key", config.get("app.api-key"))
         .end( (err, res) =>{
             if(err) done.fail(err);
-            // console.log(res.status, res.headers);
-            // console.log(res.body);
             expect(res.status).toBe(200);
             expect()
             done();
@@ -32,7 +30,6 @@ describe('Breeds route', ()=>{
         .set("X-Api-Key", config.get("app.api-key"))
         .end( (err, res) =>{
             if(err) done.fail(err);
-            // console.log(res.status, res.headers);
             console.log(res.body);
             expect(res.status).toBe(200);
             expect()
