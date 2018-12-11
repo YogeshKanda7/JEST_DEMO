@@ -17,7 +17,7 @@ describe('Votes route', ()=>{
         .end( (err, res) =>{
             if(err) done.fail(err);
             expect(res.status).toBe(200);
-            console.log(res.body);
+            // console.log(res.body);
             vote_id = res.body.id;
             done();
         });
@@ -30,7 +30,7 @@ describe('Votes route', ()=>{
         .end( (err, res) =>{
             if(err) done.fail(err);
             expect(res.status).toBe(200);
-            console.log(res.body);
+            // console.log(res.body);
             done();
         });
     });

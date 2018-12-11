@@ -22,7 +22,7 @@ describe('JEST Demo', ()=>{
 		});
 	});
 
-	test('It should fail', (done) =>{
+	test('It should return 404 error', (done) =>{
 
 		mocks.use(['invalidRoute'])
 
