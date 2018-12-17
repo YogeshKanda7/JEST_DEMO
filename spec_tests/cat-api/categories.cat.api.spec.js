@@ -4,7 +4,7 @@ request = superTest(global.ENV),
 mocks = require('../fixtures/http_mocks');
 
 describe('Categories route', ()=>{
-
+    
     var expectedData = [{ id: 5, name: 'boxes' },
     { id: 15, name: 'clothes' },
     { id: 1, name: 'hats' },
@@ -12,6 +12,20 @@ describe('Categories route', ()=>{
     { id: 2, name: 'space' },
     { id: 4, name: 'sunglasses' },
     { id: 7, name: 'ties' }];
+
+    function dataFromEach(data, keyname) {
+        var getData = [];
+        
+        function dataInArray(data_value, keys_name, callback){
+            data.forEach( d=>{
+                callback(d[keyname]);
+            })
+        }
+        dataInArray(data, keyname, function(data_id){
+            getData.push(data_id);
+        });
+        return getData;
+    }
 
     it('should return 200 status code', (done) =>{
 
@@ -53,6 +67,7 @@ describe('Categories route', ()=>{
         expect(res.status).toBe(200);
         expect(res.body.length).toBeGreaterThan(0);
         expect(res.body).toEqual(expectedData);
+        expect(dataFromEach(expectedData, "name")).toEqual(dataFromEach(res.body, "name"));
         done();
       });
     });
