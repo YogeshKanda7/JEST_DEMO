@@ -1,7 +1,8 @@
 const superTest = require('supertest'),
 config = require('config'),
 request = superTest(global.ENV),
-mocks = require('../fixtures/http_mocks');
+mocks = require('../fixtures/http_mocks'),
+helper = require('../common/helper');
 
 describe('Categories route', ()=>{
     
@@ -12,20 +13,6 @@ describe('Categories route', ()=>{
     { id: 2, name: 'space' },
     { id: 4, name: 'sunglasses' },
     { id: 7, name: 'ties' }];
-
-    function dataFromEach(data, keyname) {
-        var getData = [];
-        
-        function dataInArray(data_value, keys_name, callback){
-            data.forEach( d=>{
-                callback(d[keyname]);
-            })
-        }
-        dataInArray(data, keyname, function(data_id){
-            getData.push(data_id);
-        });
-        return getData;
-    }
 
     it('should return 200 status code', (done) =>{
 
@@ -67,7 +54,7 @@ describe('Categories route', ()=>{
         expect(res.status).toBe(200);
         expect(res.body.length).toBeGreaterThan(0);
         expect(res.body).toEqual(expectedData);
-        expect(dataFromEach(expectedData, "name")).toEqual(dataFromEach(res.body, "name"));
+        expect(helper.dataFromEach(expectedData, "name")).toEqual(helper.dataFromEach(res.body, "name"));
         done();
       });
     });
