@@ -5,7 +5,7 @@ mocks = require('../fixtures/http_mocks');
 
 describe('Breeds route', ()=>{
 
-    response_limit = 1;
+    response_limit = 2;
     page_limit = 1;
 
     it('should return all breeds with 200 status code', (done) =>{
@@ -23,7 +23,7 @@ describe('Breeds route', ()=>{
 
     it('should return specified limit of data in response body', (done) =>{
 
-        mocks.use(['listAllCatBreeds']);
+        mocks.use(['limitedBreeds']);
 
         request.get('/v1/breeds?limit=' + response_limit + '&page=' + page_limit)
         .set("X-Api-Key", config.get("app.api-key"))

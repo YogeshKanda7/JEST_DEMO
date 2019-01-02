@@ -4,9 +4,11 @@ request = superTest(global.ENV),
 mocks = require('../fixtures/http_mocks');
 
 describe('Votes route', ()=>{
-    var vote_id = 123;
+    var vote_id = 47127;
 
     it('should create a vote for selected image', (done) =>{
+       
+        mocks.use(['createVote']);
 
         request.post('/v1/votes')
         .send({
@@ -18,12 +20,14 @@ describe('Votes route', ()=>{
             if(err) done.fail(err);
             expect(res.status).toBe(200);
             // console.log(res.body);
-            vote_id = res.body.id;
+            // vote_id = res.body.id;
             done();
         });
     });
 
     it('should return votes created by user', (done) =>{
+
+        mocks.use(['listAllVotes']);
 
         request.get('/v1/votes')
         .set("X-Api-Key", "04cf3299-801e-4eac-b899-31c16488f94e")
@@ -36,7 +40,10 @@ describe('Votes route', ()=>{
     });
 
     it('should return vote specified', (done) =>{
-        request.get('/v1/votes/' + vote_id)
+
+        mocks.use(['getSpecificVote']);
+
+        request.get('/v1/votes/47127')
         .set("X-Api-Key", "04cf3299-801e-4eac-b899-31c16488f94e")
         .end( (err, res) =>{
             if(err) done.fail(err);
@@ -47,7 +54,10 @@ describe('Votes route', ()=>{
     });
 
     it('should delete specified vote', (done) =>{
-        request.delete('/v1/votes/' + vote_id)
+
+        mocks.use(['deleteVote']);
+
+        request.delete('/v1/votes/47127')
         .set("X-Api-Key", "04cf3299-801e-4eac-b899-31c16488f94e")
         .end( (err, res) =>{
             if(err) done.fail(err);
