@@ -9,7 +9,7 @@ supertest is the tool which make the request to API and fetch the response.
 ```
 npm install or npm i //This will install all required modules as specified in "package.json" file
 ```
-## Environments to run the test against: -----------
+## Environments to run the test against:
 ```
 Mock env : npm run test-mock
 ```
