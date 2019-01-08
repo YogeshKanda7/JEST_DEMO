@@ -26,3 +26,8 @@ npm run test-dev file_name/file_name_pattern
 ```
 npm run test-dev -- -t test_name/pattern
 ```
+
+## Run tests in docker
+```
+docker-compose up
+```
