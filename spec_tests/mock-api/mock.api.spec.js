@@ -6,8 +6,6 @@ var file = require('fs'),
 
 
 describe('JEST Demo', ()=>{
-
-	//console.log((global.ENV);
 	console.log(config.get("app.baseurl"));
 
 	test('It should get 200 status code', (done) =>{

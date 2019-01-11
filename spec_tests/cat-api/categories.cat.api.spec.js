@@ -5,7 +5,7 @@ mocks = require('../fixtures/http_mocks'),
 helper = require('../common/helper');
 
 describe('Categories route', ()=>{
-    
+
     var expectedData = [{ id: 5, name: 'boxes' },
     { id: 15, name: 'clothes' },
     { id: 1, name: 'hats' },
@@ -38,7 +38,6 @@ describe('Categories route', ()=>{
             if(err) done.fail(err);
             expect(res.status).toBe(200);
             expect(res.body.length).toEqual(2);
-            expect()
             done();
         });
     });

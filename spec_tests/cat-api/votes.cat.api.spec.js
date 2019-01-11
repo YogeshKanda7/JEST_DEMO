@@ -7,7 +7,7 @@ describe('Votes route', ()=>{
     var vote_id = 47127;
 
     it('should create a vote for selected image', (done) =>{
-       
+
         mocks.use(['createVote']);
 
         request.post('/v1/votes')
@@ -19,8 +19,7 @@ describe('Votes route', ()=>{
         .end( (err, res) =>{
             if(err) done.fail(err);
             expect(res.status).toBe(200);
-            // console.log(res.body);
-            // vote_id = res.body.id;
+            expect(typeof(res.body.id)).toBe("number");
             done();
         });
     });
@@ -34,7 +33,7 @@ describe('Votes route', ()=>{
         .end( (err, res) =>{
             if(err) done.fail(err);
             expect(res.status).toBe(200);
-            // console.log(res.body);
+            expect(res.body.length).toBeGreaterThan(0);
             done();
         });
     });

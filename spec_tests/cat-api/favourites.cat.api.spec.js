@@ -14,14 +14,12 @@ describe('Favourites route', ()=>{
         .set("X-Api-Key", config.get("app.api-key"))
         .end( (err, res) =>{
             if(err) done.fail(err);
-            // console.log(res.status, res.headers);
-            // console.log(res.body);
             expect(res.status).toBe(200);
             done();
         });
     });
 
-    it('should save an image as favourite', (done) =>{
+    it('should save an image as favourite and get the saved Id', (done) =>{
 
         mocks.use(['saveFavouriteImage']);
 
@@ -33,7 +31,9 @@ describe('Favourites route', ()=>{
         .end( (err, res) =>{
             if(err) done.fail(err);
             expect(res.status).toBe(200);
+            expect(typeof(res.body.id)).toBe("number");
             expect(res.body.message).toBe("SUCCESS");
+
             image_id = res.body.id;
             done();
         });
@@ -48,7 +48,7 @@ describe('Favourites route', ()=>{
         .end( (err, res) =>{
             if(err) done.fail(err);
             expect(res.status).toBe(200);
-            // console.log(res.body);
+            expect(res.body.length).toBeGreaterThan(0);
             done();
         });
     });
